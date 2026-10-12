@@ -1,0 +1,1 @@
+"""Safe web search package."""

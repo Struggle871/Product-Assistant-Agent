@@ -1,0 +1,95 @@
+:root {
+  color: #1e2630;
+  background: #f4f5f7;
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input, textarea { font: inherit; }
+
+.app-shell { min-height: 100vh; }
+.topbar {
+  min-height: 72px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-bottom: 1px solid #dce1e7;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: #176b54;
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.brand h1, .brand p { margin: 0; }
+.brand h1 { font-size: 17px; }
+.brand p { margin-top: 2px; color: #68717d; font-size: 12px; }
+.service-state {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #8a4b19;
+  font-size: 13px;
+  font-weight: 600;
+}
+.service-state.is-ready { color: #176b54; }
+.workspace { max-width: 980px; margin: 64px auto; padding: 0 24px; }
+.workspace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #d5dbe2;
+}
+.workspace-header h2 { margin: 6px 0 8px; font-size: 30px; letter-spacing: 0; }
+.workspace-header p { margin: 0; color: #626c78; line-height: 1.6; }
+.eyebrow { color: #176b54; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.capability {
+  min-height: 116px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #dce1e7;
+  border-radius: 6px;
+}
+.capability svg { color: #176b54; }
+.capability span { font-weight: 650; }
+.capability small { color: #78828e; }
+.dependency-panel { padding-top: 6px; }
+.dependency-panel h3 { font-size: 15px; }
+.dependency-panel ul { margin: 0; padding: 0; list-style: none; }
+.dependency-panel li {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid #dce1e7;
+}
+.dependency-panel strong { font-size: 13px; }
+.ok { color: #176b54; }
+.error { color: #a03c32; }
+
+@media (max-width: 720px) {
+  .topbar { padding: 0 18px; }
+  .brand p { display: none; }
+  .service-state { font-size: 0; }
+  .service-state svg { width: 20px; height: 20px; }
+  .workspace { margin: 36px auto; padding: 0 18px; }
+  .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

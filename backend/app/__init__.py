@@ -1,0 +1,1 @@
+"""Product Assistant backend application."""

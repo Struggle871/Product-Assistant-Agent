@@ -1,0 +1,16 @@
+alembic<2.0,>=1.13
+asyncpg<1.0,>=0.29
+boto3<2.0,>=1.35
+celery[redis]<6.0,>=5.4
+fastapi<1.0,>=0.115
+pydantic-settings<3.0,>=2.6
+redis<6.0,>=5.2
+sqlalchemy[asyncio]<3.0,>=2.0
+uvicorn[standard]<1.0,>=0.32
+
+[dev]
+httpx<1.0,>=0.27
+pyright<2.0,>=1.1
+pytest<9.0,>=8.3
+pytest-asyncio<1.0,>=0.24
+ruff<1.0,>=0.8
