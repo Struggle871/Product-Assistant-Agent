@@ -8,6 +8,9 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from app.config import get_settings
+from app.domain.models import Base
+
+__all__ = ["Base", "engine", "get_session", "session_factory"]
 
 engine: AsyncEngine = create_async_engine(get_settings().database_url, pool_pre_ping=True)
 session_factory = async_sessionmaker(engine, expire_on_commit=False)

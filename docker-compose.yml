@@ -90,11 +90,17 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-product_assistant}:${POSTGRES_PASSWORD:-product_assistant}@postgres:5432/${POSTGRES_DB:-product_assistant}
       REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_BUCKET: ${MINIO_BUCKET:-product-assistant}
     depends_on:
       redis:
         condition: service_healthy
       postgres:
         condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
     command: ["celery", "-A", "app.worker.celery_app", "worker", "--loglevel=INFO"]
 
   frontend:

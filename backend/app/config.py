@@ -16,8 +16,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     api_prefix: str = "/api/v1"
     database_url: str = (
-        "postgresql+asyncpg://product_assistant:product_assistant@localhost:5432/"
-        "product_assistant"
+        "postgresql+asyncpg://product_assistant:product_assistant@localhost:5432/product_assistant"
     )
     redis_url: str = "redis://localhost:6379/0"
     minio_endpoint: str = "http://localhost:9000"

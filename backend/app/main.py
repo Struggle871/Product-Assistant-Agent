@@ -5,6 +5,7 @@ from typing import Any
 from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 
+from app.api.admin import router as admin_router
 from app.config import get_settings
 from app.health import readiness
 from app.logging import configure_logging
@@ -23,6 +24,7 @@ app = FastAPI(
     description="Foundation API for the multimodal Product Assistant Agent.",
     lifespan=lifespan,
 )
+app.include_router(admin_router)
 
 
 @app.get("/", tags=["meta"])
