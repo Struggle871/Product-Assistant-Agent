@@ -1,0 +1,19 @@
+{
+  "version": "retrieval-smoke-v1",
+  "purpose": "Small smoke set over self-authored demo manuals; not production quality certification",
+  "cases": [
+    {"case_id": "ax55-setup", "query": "Archer AX55 如何首次连接？", "product_name": "Archer AX55", "expected_sections": ["archer-ax55::首次连接"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "ax55-reset", "query": "Archer AX55 如何恢复出厂设置？", "product_name": "Archer AX55", "expected_sections": ["archer-ax55::恢复出厂设置"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "ax55-offline", "query": "Archer AX55 无法联网怎么办？", "product_name": "Archer AX55", "expected_sections": ["archer-ax55::无法上网"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "m110w-install", "query": "LaserJet M110w 如何连接无线网络？", "product_name": "LaserJet M110w", "expected_sections": ["hp-m110w::无线安装"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "m110w-print", "query": "LaserJet M110w 打印任务无响应怎么办？", "product_name": "LaserJet M110w", "expected_sections": ["hp-m110w::打印任务无响应"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "m110w-paper", "query": "LaserJet M110w 卡纸怎么办？", "product_name": "LaserJet M110w", "expected_sections": ["hp-m110w::卡纸处理"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "c200-wifi", "query": "Tapo C200 可以连接 5 GHz Wi-Fi 吗？", "product_name": "Tapo C200", "expected_sections": ["tapo-c200::添加摄像机"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "c200-offline", "query": "Tapo C200 设备离线怎么办？", "product_name": "Tapo C200", "expected_sections": ["tapo-c200::设备离线"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "c200-reset", "query": "Tapo C200 如何复位？", "product_name": "Tapo C200", "expected_sections": ["tapo-c200::隐私与复位"], "expected_answerability": "ANSWERABLE"},
+    {"case_id": "ax55-firmware-absent", "query": "Archer AX55 最新固件如何升级？", "product_name": "Archer AX55", "expected_sections": [], "expected_answerability": "UNANSWERABLE"},
+    {"case_id": "c200-warranty-absent", "query": "Tapo C200 保修价格是多少？", "product_name": "Tapo C200", "expected_sections": [], "expected_answerability": "UNANSWERABLE"},
+    {"case_id": "ax55-multiple-intents", "query": "Archer AX55 如何首次连接并升级固件？", "product_name": "Archer AX55", "expected_sections": ["archer-ax55::首次连接"], "expected_answerability": "PARTIAL"},
+    {"case_id": "missing-product", "query": "如何重置？", "product_name": null, "expected_sections": [], "expected_answerability": "MISSING_CONTEXT"}
+  ]
+}

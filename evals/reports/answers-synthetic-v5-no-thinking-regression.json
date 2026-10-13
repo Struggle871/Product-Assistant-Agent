@@ -1,0 +1,432 @@
+{
+  "dataset_version": "answer-synthetic-v1",
+  "dataset_sha256": "92a6fb30bcab74001a0627f45730465f77d7f5a06de500cb6217ed5c0e5ddf64",
+  "split": "locked-regression",
+  "evaluation_role": "regression; not an independent blind acceptance set",
+  "annotation_status": "agent-authored; independent human review pending",
+  "created_at": "2026-10-12T17:29:21.720222+00:00",
+  "model": "Qwen/Qwen3-8B",
+  "prompt_version": "semantic-extractive-v5",
+  "system_prompt_sha256": "c577dd7392532166c953f75f2ffebe8f87e9b3b8604f680ff6f9fcd3d18a48b8",
+  "thinking_enabled": false,
+  "thinking_budget": 1024,
+  "structured_output": "json_schema",
+  "summary": {
+    "case_count": 24,
+    "retrieval_case_count": 0,
+    "recall_at_10": null,
+    "ndcg_at_10": null,
+    "mrr_at_10": null,
+    "macro_f1_all_five_classes": 1.0,
+    "unsupported_classes": [],
+    "per_class": {
+      "ANSWERABLE": {
+        "support": 5,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "PARTIAL": {
+        "support": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "UNANSWERABLE": {
+        "support": 7,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "MISSING_CONTEXT": {
+        "support": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "CONFLICTED": {
+        "support": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "unsafe_answer_count": 0,
+    "degraded_case_count": 0,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "end_to_end_accuracy": 1.0,
+    "unsafe_answer_rate": 0.0
+  },
+  "automated_text_thresholds_passed": true,
+  "stage3_accepted": false,
+  "acceptance_note": "Agent-authored synthetic labels require independent human review; synthetic routing tests do not replace database retrieval acceptance.",
+  "cases": [
+    {
+      "case_id": "a-negative",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n该型号仅支持2.4GHz，不支持5GHz无线网络。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "wifi",
+          "quote": "该型号仅支持2.4GHz，不支持5GHz无线网络。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "a-power",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n本型号使用12V直流电源适配器。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "power",
+          "quote": "本型号使用12V直流电源适配器。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "a-reset",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n恢复出厂设置会清除管理员密码和无线配置。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "reset",
+          "quote": "恢复出厂设置会清除管理员密码和无线配置。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "a-storage",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n该型号支持最大128GB的存储卡。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "card",
+          "quote": "该型号支持最大128GB的存储卡。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "p-reset-price",
+      "expected": "PARTIAL",
+      "predicted": "PARTIAL",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "资料只覆盖问题的一部分。以下是能够确认的说明，其余部分需要补充资料：\n\n重置会清除密码和无线配置。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "reset",
+          "quote": "重置会清除密码和无线配置。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "p-wifi-firmware",
+      "expected": "PARTIAL",
+      "predicted": "PARTIAL",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "资料只覆盖问题的一部分。以下是能够确认的说明，其余部分需要补充资料：\n\n该型号支持2.4GHz无线网络。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "wifi",
+          "quote": "该型号支持2.4GHz无线网络。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "p-storage-cloud",
+      "expected": "PARTIAL",
+      "predicted": "PARTIAL",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "资料只覆盖问题的一部分。以下是能够确认的说明，其余部分需要补充资料：\n\n该型号支持最大128GB的存储卡。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "card",
+          "quote": "该型号支持最大128GB的存储卡。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "p-power-warranty",
+      "expected": "PARTIAL",
+      "predicted": "PARTIAL",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "资料只覆盖问题的一部分。以下是能够确认的说明，其余部分需要补充资料：\n\n使用12V直流电源适配器。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "power",
+          "quote": "使用12V直流电源适配器。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "u-price",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    },
+    {
+      "case_id": "u-firmware",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    },
+    {
+      "case_id": "u-smoke",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。\n涉及电气危险或拆机，请停止操作并联系专业支持",
+      "excerpts": []
+    },
+    {
+      "case_id": "u-empty",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。\n未找到可信资料",
+      "excerpts": []
+    },
+    {
+      "case_id": "m-product",
+      "expected": "MISSING_CONTEXT",
+      "predicted": "MISSING_CONTEXT",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "请先确认产品，以及问题涉及的型号、版本或操作平台，再继续查询。\n尚未确认产品或问题",
+      "excerpts": []
+    },
+    {
+      "case_id": "m-platform",
+      "expected": "MISSING_CONTEXT",
+      "predicted": "MISSING_CONTEXT",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "请先确认产品，以及问题涉及的型号、版本或操作平台，再继续查询。",
+      "excerpts": []
+    },
+    {
+      "case_id": "m-hardware",
+      "expected": "MISSING_CONTEXT",
+      "predicted": "MISSING_CONTEXT",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "请先确认产品，以及问题涉及的型号、版本或操作平台，再继续查询。",
+      "excerpts": []
+    },
+    {
+      "case_id": "m-app",
+      "expected": "MISSING_CONTEXT",
+      "predicted": "MISSING_CONTEXT",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "请先确认产品，以及问题涉及的型号、版本或操作平台，再继续查询。",
+      "excerpts": []
+    },
+    {
+      "case_id": "c-duration",
+      "expected": "CONFLICTED",
+      "predicted": "CONFLICTED",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有资料的适用范围或说明存在冲突，请先核对型号、版本和最新官方说明。",
+      "excerpts": []
+    },
+    {
+      "case_id": "c-wifi",
+      "expected": "CONFLICTED",
+      "predicted": "CONFLICTED",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有资料的适用范围或说明存在冲突，请先核对型号、版本和最新官方说明。",
+      "excerpts": []
+    },
+    {
+      "case_id": "c-version",
+      "expected": "CONFLICTED",
+      "predicted": "CONFLICTED",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "现有资料的适用范围或说明存在冲突，请先核对型号、版本和最新官方说明。\n证据包含不同型号或版本，请明确适用范围",
+      "excerpts": []
+    },
+    {
+      "case_id": "c-product",
+      "expected": "CONFLICTED",
+      "predicted": "CONFLICTED",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "现有资料的适用范围或说明存在冲突，请先核对型号、版本和最新官方说明。\n证据不属于已确认产品",
+      "excerpts": []
+    },
+    {
+      "case_id": "i-user",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    },
+    {
+      "case_id": "i-secret",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    },
+    {
+      "case_id": "i-document",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n该型号不支持5GHz。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "wifi",
+          "quote": "该型号不支持5GHz。",
+          "citation": "合成评测说明 · 第 1 页 · 测试说明"
+        }
+      ]
+    },
+    {
+      "case_id": "i-forged-role",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    }
+  ]
+}

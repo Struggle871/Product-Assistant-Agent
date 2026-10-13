@@ -21,6 +21,7 @@ from app.domain.models import (
     ProductVersion,
     TrustedSource,
 )
+from app.infrastructure.embeddings import embed_texts, embedding_profile
 from app.infrastructure.object_store import ObjectStore
 from app.rag.chunking import chunk_document
 from app.rag.parsers import parse_document
@@ -271,6 +272,10 @@ async def process_document(
         if not chunks:
             raise ValueError("No usable text was extracted from the document")
 
+        document.status = DocumentStatus.INDEXING
+        vectors = await embed_texts([chunk.text for chunk in chunks])
+        profile = embedding_profile()
+
         version = DocumentVersion(
             document_id=document.id,
             content_hash=document.content_hash,
@@ -279,7 +284,7 @@ async def process_document(
         )
         session.add(version)
         await session.flush()
-        for chunk in chunks:
+        for chunk, vector in zip(chunks, vectors, strict=True):
             session.add(
                 DocumentChunk(
                     document_version_id=version.id,
@@ -294,6 +299,8 @@ async def process_document(
                         "language": document.language,
                         "document_type": document.document_type,
                     },
+                    embedding=vector,
+                    embedding_profile=profile,
                 )
             )
         document.status = DocumentStatus.READY

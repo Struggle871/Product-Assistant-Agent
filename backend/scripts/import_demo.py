@@ -4,7 +4,7 @@ from pathlib import Path
 from sqlalchemy import select
 
 from app.db import session_factory
-from app.domain.models import Product
+from app.domain.models import DocumentStatus, Product
 from app.infrastructure.object_store import ObjectStore
 from app.rag.service import create_document, process_document, seed_catalog
 
@@ -36,6 +36,11 @@ async def main() -> None:
             )
             if is_new:
                 await process_document(session, ObjectStore(), document.id, job.id)
+            elif document.status != DocumentStatus.READY:
+                raise RuntimeError(
+                    f"Existing demo document {path.name} is {document.status}; "
+                    "retry its ingestion job in the admin workspace before continuing"
+                )
     print("Demo catalog and documents are ready.")
 
 

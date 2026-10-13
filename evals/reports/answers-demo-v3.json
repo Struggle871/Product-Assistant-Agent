@@ -1,0 +1,302 @@
+{
+  "dataset_version": "answer-demo-development-v1",
+  "dataset_sha256": "ad6d5959a040906a5a07d04a9a27a8db60610544c187911a46a12e3834f2fac0",
+  "split": "development",
+  "evaluation_role": "regression; not an independent blind acceptance set",
+  "annotation_status": "agent-authored; independent human review pending",
+  "created_at": "2026-10-12T17:21:29.032155+00:00",
+  "model": "Qwen/Qwen3-8B",
+  "prompt_version": "semantic-extractive-v3",
+  "system_prompt_sha256": "72d90e54a51778824d58047bf70631ba4a5b45856eaa4c6b5921f8f6c3a36b6d",
+  "thinking_enabled": true,
+  "thinking_budget": 1024,
+  "summary": {
+    "case_count": 13,
+    "retrieval_case_count": 10,
+    "recall_at_10": 1.0,
+    "ndcg_at_10": 0.9261859507142916,
+    "mrr_at_10": 0.9,
+    "macro_f1_all_five_classes": 0.7482352941176471,
+    "unsupported_classes": [
+      "CONFLICTED"
+    ],
+    "per_class": {
+      "ANSWERABLE": {
+        "support": 9,
+        "precision": 1.0,
+        "recall": 0.8888888888888888,
+        "f1": 0.9411764705882353
+      },
+      "PARTIAL": {
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "UNANSWERABLE": {
+        "support": 2,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "MISSING_CONTEXT": {
+        "support": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "CONFLICTED": {
+        "support": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "unsafe_answer_count": 0,
+    "degraded_case_count": 1,
+    "citation_precision": 0.9365079365079365,
+    "citation_recall": 0.9,
+    "end_to_end_accuracy": 0.7692307692307693,
+    "unsafe_answer_rate": 0.0
+  },
+  "automated_text_thresholds_passed": false,
+  "stage3_accepted": false,
+  "acceptance_note": "Agent-authored synthetic labels require independent human review; synthetic routing tests do not replace database retrieval acceptance.",
+  "cases": [
+    {
+      "case_id": "ax55-setup",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n将光猫网线接入路由器蓝色 WAN 口，等待电源指示灯稳定。连接路由器底部标签所示的默认无线网络，然后访问 `http://tplinkwifi.net` 完成管理员密码和上网方式设置。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "5c28bb2e-8c6e-4efc-b2fd-c5bb4cc3bba3",
+          "quote": "将光猫网线接入路由器蓝色 WAN 口，等待电源指示灯稳定。连接路由器底部标签所示的默认无线网络，然后访问 `http://tplinkwifi.net` 完成管理员密码和上网方式设置。",
+          "citation": "archer-ax55 · 首次连接"
+        }
+      ]
+    },
+    {
+      "case_id": "ax55-reset",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n路由器通电时按住 Reset 按钮约 10 秒，直至指示灯闪烁。恢复操作会清除无线名称、密码和上网配置。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "a6aa6c51-3fa0-407d-abe8-a174e44fddc9",
+          "quote": "路由器通电时按住 Reset 按钮约 10 秒，直至指示灯闪烁。恢复操作会清除无线名称、密码和上网配置。",
+          "citation": "archer-ax55 · 恢复出厂设置"
+        }
+      ]
+    },
+    {
+      "case_id": "ax55-offline",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 0.42857142857142855,
+      "citation_recall": 1.0,
+      "end_to_end_correct": false,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n确认 WAN 指示灯正常，并检查光猫是否可以独立联网。重新插拔 WAN 网线后，在管理页面的网络状态中确认已获取 IP 地址。若运营商要求 PPPoE，请核对宽带账号和密码。 [1]\n\n将光猫网线接入路由器蓝色 WAN 口，等待电源指示灯稳定。连接路由器底部标签所示的默认无线网络，然后访问 `http://tplinkwifi.net` 完成管理员密码和上网方式设置。 [2]\n\n路由器通电时按住 Reset 按钮约 10 秒，直至指示灯闪烁。恢复操作会清除无线名称、密码和上网配置。 [3]",
+      "excerpts": [
+        {
+          "chunk_id": "dc4bbe9c-f008-4ab2-a99c-60a64a6e6fcd",
+          "quote": "确认 WAN 指示灯正常，并检查光猫是否可以独立联网。重新插拔 WAN 网线后，在管理页面的网络状态中确认已获取 IP 地址。若运营商要求 PPPoE，请核对宽带账号和密码。",
+          "citation": "archer-ax55 · 无法上网"
+        },
+        {
+          "chunk_id": "5c28bb2e-8c6e-4efc-b2fd-c5bb4cc3bba3",
+          "quote": "将光猫网线接入路由器蓝色 WAN 口，等待电源指示灯稳定。连接路由器底部标签所示的默认无线网络，然后访问 `http://tplinkwifi.net` 完成管理员密码和上网方式设置。",
+          "citation": "archer-ax55 · 首次连接"
+        },
+        {
+          "chunk_id": "a6aa6c51-3fa0-407d-abe8-a174e44fddc9",
+          "quote": "路由器通电时按住 Reset 按钮约 10 秒，直至指示灯闪烁。恢复操作会清除无线名称、密码和上网配置。",
+          "citation": "archer-ax55 · 恢复出厂设置"
+        }
+      ]
+    },
+    {
+      "case_id": "m110w-install",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n在电脑安装 HP Smart，将打印机置于无线设置模式，然后按照应用提示选择家庭 Wi-Fi。电脑和打印机应连接同一个网络。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "6d91fcd9-11fa-4830-b1db-e9dce43e3018",
+          "quote": "在电脑安装 HP Smart，将打印机置于无线设置模式，然后按照应用提示选择家庭 Wi-Fi。电脑和打印机应连接同一个网络。",
+          "citation": "hp-m110w · 无线安装"
+        }
+      ]
+    },
+    {
+      "case_id": "m110w-print",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n检查电源和无线指示灯，清除操作系统打印队列中的暂停任务。重启打印机和 HP Smart 后重新添加设备。Windows 与 macOS 的驱动步骤可能不同，执行前应确认用户平台。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "93462bce-c561-4dac-bc24-44c7f24162ff",
+          "quote": "检查电源和无线指示灯，清除操作系统打印队列中的暂停任务。重启打印机和 HP Smart 后重新添加设备。Windows 与 macOS 的驱动步骤可能不同，执行前应确认用户平台。",
+          "citation": "hp-m110w · 打印任务无响应"
+        }
+      ]
+    },
+    {
+      "case_id": "m110w-paper",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n关闭电源并打开耗材舱，沿进纸方向缓慢取出纸张。不要撕扯纸张；确认内部没有残片后重新装入平整、干燥的纸张。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "4e231501-9aee-4120-b8c3-33f8227cb6e9",
+          "quote": "关闭电源并打开耗材舱，沿进纸方向缓慢取出纸张。不要撕扯纸张；确认内部没有残片后重新装入平整、干燥的纸张。",
+          "citation": "hp-m110w · 卡纸处理"
+        }
+      ]
+    },
+    {
+      "case_id": "c200-wifi",
+      "expected": "ANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": 0.0,
+      "end_to_end_correct": false,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    },
+    {
+      "case_id": "c200-offline",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n确认路由器可以联网且摄像机位于无线覆盖范围内。重启摄像机并等待状态灯稳定；若 Wi-Fi 名称或密码已改变，需要重新执行配网。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "fa86f22d-b7bc-45a7-a3ad-4665d5abc43c",
+          "quote": "确认路由器可以联网且摄像机位于无线覆盖范围内。重启摄像机并等待状态灯稳定；若 Wi-Fi 名称或密码已改变，需要重新执行配网。",
+          "citation": "tapo-c200 · 设备离线"
+        }
+      ]
+    },
+    {
+      "case_id": "c200-reset",
+      "expected": "ANSWERABLE",
+      "predicted": "ANSWERABLE",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "根据所选产品的资料，相关说明如下：\n\n在执行复位前先确认用户是否需要保留录像配置。按住 Reset 按钮至少 5 秒，状态灯变化后松开，设备将恢复默认配置。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "69e50928-a444-4a15-ba6c-9bce399d482d",
+          "quote": "在执行复位前先确认用户是否需要保留录像配置。按住 Reset 按钮至少 5 秒，状态灯变化后松开，设备将恢复默认配置。",
+          "citation": "tapo-c200 · 隐私与复位"
+        }
+      ]
+    },
+    {
+      "case_id": "ax55-firmware-absent",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": false,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [
+        "Semantic assessment unavailable or citation validation failed"
+      ],
+      "answer_text": "语义评估或引用校验未通过，暂时无法生成可靠回答，请稍后重试",
+      "excerpts": []
+    },
+    {
+      "case_id": "c200-warranty-absent",
+      "expected": "UNANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "现有可信资料无法支持这个问题的答案。请补充对应的官方说明或联系厂商支持。",
+      "excerpts": []
+    },
+    {
+      "case_id": "ax55-multiple-intents",
+      "expected": "PARTIAL",
+      "predicted": "PARTIAL",
+      "citation_precision": 1.0,
+      "citation_recall": 1.0,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": "Qwen/Qwen3-8B",
+      "warnings": [],
+      "answer_text": "资料只覆盖问题的一部分。以下是能够确认的说明，其余部分需要补充资料：\n\n将光猫网线接入路由器蓝色 WAN 口，等待电源指示灯稳定。连接路由器底部标签所示的默认无线网络，然后访问 `http://tplinkwifi.net` 完成管理员密码和上网方式设置。 [1]",
+      "excerpts": [
+        {
+          "chunk_id": "5c28bb2e-8c6e-4efc-b2fd-c5bb4cc3bba3",
+          "quote": "将光猫网线接入路由器蓝色 WAN 口，等待电源指示灯稳定。连接路由器底部标签所示的默认无线网络，然后访问 `http://tplinkwifi.net` 完成管理员密码和上网方式设置。",
+          "citation": "archer-ax55 · 首次连接"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-product",
+      "expected": "MISSING_CONTEXT",
+      "predicted": "MISSING_CONTEXT",
+      "citation_precision": null,
+      "citation_recall": null,
+      "end_to_end_correct": true,
+      "unsafe_answer": false,
+      "model_used": null,
+      "warnings": [],
+      "answer_text": "请先确认产品，以及问题涉及的型号、版本或操作平台，再继续查询。\n尚未确认产品或问题",
+      "excerpts": []
+    }
+  ]
+}

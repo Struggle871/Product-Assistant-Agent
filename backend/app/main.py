@@ -6,6 +6,7 @@ from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 
 from app.api.admin import router as admin_router
+from app.api.rag import router as rag_router
 from app.config import get_settings
 from app.health import readiness
 from app.logging import configure_logging
@@ -25,6 +26,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 app.include_router(admin_router)
+app.include_router(rag_router)
 
 
 @app.get("/", tags=["meta"])

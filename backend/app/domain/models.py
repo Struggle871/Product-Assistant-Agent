@@ -5,6 +5,7 @@ from enum import StrEnum
 from typing import Any
 from uuid import uuid4
 
+from pgvector.sqlalchemy import Vector
 from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
@@ -175,6 +176,8 @@ class DocumentChunk(Base):
     heading: Mapped[str | None] = mapped_column(String(300), nullable=True)
     page_number: Mapped[int | None] = mapped_column(Integer, nullable=True)
     metadata_json: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+    embedding: Mapped[list[float] | None] = mapped_column(Vector(), nullable=True)
+    embedding_profile: Mapped[str | None] = mapped_column(String(128), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     document_version: Mapped[DocumentVersion] = relationship(back_populates="chunks")

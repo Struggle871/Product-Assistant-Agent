@@ -7,6 +7,35 @@ export type Document = { id: string; product_id: string; product_model_id: strin
 export type Job = { id: string; document_id: string; status: string; attempts: number; max_attempts: number; error_message: string | null };
 export type TrustedSource = { id: string; brand: string; canonical_host: string; allowed_subdomains: string[]; allowed_path_prefixes: string[]; source_type: string; enabled: boolean };
 export type IndexVersion = { id: string; version: string; status: string; document_count: number; chunk_count: number; published_at: string | null };
+export type Evidence = { chunk_id: string; document_id: string; document_version_id: string; text: string; heading: string | null; page_number: number | null; product_id: string; document_title: string; citation: string; rrf_score: number };
+export type RetrievalResponse = {
+  evidence: Evidence[];
+  answerability: "ANSWERABLE" | "PARTIAL" | "UNANSWERABLE" | "MISSING_CONTEXT" | "CONFLICTED";
+  answerability_reasons: string[];
+  trace: { vector_candidates: number; bm25_candidates: number; total_latency_ms: number; warnings: string[]; embedding_profile: string };
+};
+
+export type AnswerResponse = RetrievalResponse & {
+  answer_text: string;
+  excerpts: { chunk_id: string; quote: string; citation: string }[];
+  model: string | null;
+  prompt_version: string;
+  model_latency_ms: number;
+};
+
+export function answerKnowledge(query: string, productId: string): Promise<AnswerResponse> {
+  return request<AnswerResponse>("/api/v1/rag/answer", undefined, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, product_id: productId }),
+  });
+}
+
+export function searchKnowledge(query: string, productId: string): Promise<RetrievalResponse> {
+  return request<RetrievalResponse>("/api/v1/rag/search", undefined, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, product_id: productId }),
+  });
+}
 
 async function request<T>(path: string, apiKey?: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers);

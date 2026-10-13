@@ -1,14 +1,14 @@
 services:
   postgres:
-    image: paradedb/paradedb:latest
+    image: paradedb/paradedb@sha256:a87d7afcf45fc8670bf94120499a60aceb8a8ad7e2760b5be32b9f551c1c5731
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-product_assistant}
       POSTGRES_USER: ${POSTGRES_USER:-product_assistant}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-product_assistant}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
@@ -29,7 +29,9 @@ services:
       retries: 20
 
   minio:
-    image: minio/minio:latest
+    image: product-assistant-minio:local
+    build:
+      context: ./infra/minio
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
@@ -46,19 +48,21 @@ services:
       retries: 20
 
   minio-init:
-    image: minio/mc:latest
+    image: product-assistant-backend:local
+    build:
+      context: ./backend
     depends_on:
       minio:
         condition: service_healthy
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
       MINIO_BUCKET: ${MINIO_BUCKET:-product-assistant}
-    volumes:
-      - ./infra/minio/create-bucket.sh:/create-bucket.sh:ro
-    entrypoint: ["/bin/sh", "/create-bucket.sh"]
+    command: ["python", "-m", "scripts.init_object_store"]
 
   api:
+    image: product-assistant-backend:local
     build:
       context: ./backend
     environment:
@@ -71,8 +75,34 @@ services:
       MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
       MINIO_BUCKET: ${MINIO_BUCKET:-product-assistant}
       ADMIN_API_KEY: ${ADMIN_API_KEY:-change-me}
+      CHAT_PROVIDER: ${CHAT_PROVIDER:-disabled}
+      CHAT_BASE_URL: ${CHAT_BASE_URL:-https://api.siliconflow.cn/v1}
+      CHAT_MODEL: ${CHAT_MODEL:-Qwen/Qwen3-8B}
+      CHAT_API_KEY: ${CHAT_API_KEY:-}
+      CHAT_TIMEOUT_SECONDS: ${CHAT_TIMEOUT_SECONDS:-45}
+      CHAT_MAX_TOKENS: ${CHAT_MAX_TOKENS:-2048}
+      CHAT_ENABLE_THINKING: ${CHAT_ENABLE_THINKING:-false}
+      CHAT_THINKING_BUDGET: ${CHAT_THINKING_BUDGET:-1024}
+      CHAT_STRUCTURED_OUTPUT: ${CHAT_STRUCTURED_OUTPUT:-json_object}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-openai}
+      EMBEDDING_BASE_URL: ${EMBEDDING_BASE_URL:-https://api.siliconflow.cn/v1}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-BAAI/bge-m3}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-1024}
+      EMBEDDING_SEND_DIMENSIONS: ${EMBEDDING_SEND_DIMENSIONS:-false}
+      EMBEDDING_TIMEOUT_SECONDS: ${EMBEDDING_TIMEOUT_SECONDS:-30}
+      EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE:-32}
     ports:
       - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/ready', timeout=7)"]
+      interval: 5s
+      timeout: 10s
+      start_period: 30s
+      retries: 30
+    volumes:
+      - ./data:/data:ro
+      - ./evals:/evals
     depends_on:
       postgres:
         condition: service_healthy
@@ -83,6 +113,7 @@ services:
     command: ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
 
   worker:
+    image: product-assistant-backend:local
     build:
       context: ./backend
     environment:
@@ -94,7 +125,17 @@ services:
       MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
       MINIO_BUCKET: ${MINIO_BUCKET:-product-assistant}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-openai}
+      EMBEDDING_BASE_URL: ${EMBEDDING_BASE_URL:-https://api.siliconflow.cn/v1}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-BAAI/bge-m3}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-1024}
+      EMBEDDING_SEND_DIMENSIONS: ${EMBEDDING_SEND_DIMENSIONS:-false}
+      EMBEDDING_TIMEOUT_SECONDS: ${EMBEDDING_TIMEOUT_SECONDS:-30}
+      EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE:-32}
     depends_on:
+      api:
+        condition: service_healthy
       redis:
         condition: service_healthy
       postgres:
@@ -109,7 +150,8 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - api
+      api:
+        condition: service_healthy
 
 volumes:
   postgres_data:
