@@ -1,0 +1,210 @@
+{
+  "record_version": "stage3-acceptance-v1",
+  "stage": 3,
+  "scope": "hybrid RAG and grounded pure-text answer baseline",
+  "accepted_on": "2026-10-13",
+  "timezone": "Asia/Shanghai",
+  "stage3_accepted": true,
+  "code_commit": "8333069cc27cacc5d85fe049bc85c377621358c7",
+  "human_review": {
+    "status": "approved",
+    "reviewer": "project user",
+    "channel": "current project conversation",
+    "confirmation": "审核通过",
+    "label_changes": [],
+    "review_instructions": "evals/HUMAN_REVIEW.md"
+  },
+  "configuration": {
+    "embedding_model": "BAAI/bge-m3",
+    "embedding_dimensions": 1024,
+    "chat_model": "Qwen/Qwen3-8B",
+    "prompt_version": "semantic-extractive-v5",
+    "system_prompt_sha256": "c577dd7392532166c953f75f2ffebe8f87e9b3b8604f680ff6f9fcd3d18a48b8",
+    "thinking_enabled": false,
+    "structured_output": "json_schema"
+  },
+  "artifacts": [
+    {
+      "dataset_path": "evals/retrieval-smoke-v1.json",
+      "dataset_version": "retrieval-smoke-v1",
+      "dataset_sha256": "2995f3a3b3a7c94a6699af7be090b679d7fbadc213e96361cf7a5cc5fc2702c2",
+      "report_path": "evals/reports/retrieval-latest.json",
+      "report_sha256": "ac215a78a53cba4e7d9b4162aba37cadd082af0371dbd22f14d68f5539034d33",
+      "role": "database-retrieval-smoke",
+      "case_count": 13,
+      "label_changes": [],
+      "locked_for_prompt_tuning": false
+    },
+    {
+      "dataset_path": "evals/answer-demo-development-v1.json",
+      "dataset_version": "answer-demo-development-v1",
+      "dataset_sha256": "4a2263ad26bab21a8c17cf64c68a81626086d31ffae3340f35035d99a14af5c5",
+      "report_path": "evals/reports/answers-demo-v5-no-thinking.json",
+      "report_sha256": "789801160584d3347b1a9a047e171086f9f3922a737757b5806b528bc27d40f8",
+      "role": "database-answer-development",
+      "case_count": 13,
+      "label_changes": [],
+      "locked_for_prompt_tuning": false,
+      "evaluation_dataset_sha256": "ad6d5959a040906a5a07d04a9a27a8db60610544c187911a46a12e3834f2fac0"
+    },
+    {
+      "dataset_path": "evals/answer-synthetic-v1.json",
+      "dataset_version": "answer-synthetic-v1",
+      "dataset_sha256": "92a6fb30bcab74001a0627f45730465f77d7f5a06de500cb6217ed5c0e5ddf64",
+      "report_path": "evals/reports/answers-synthetic-v5-no-thinking-regression.json",
+      "report_sha256": "0bb0d54a11d6ec6153982ef59429cd5897d18c71cb7607dd124e67d9b21249c7",
+      "role": "synthetic-regression-exposed-during-tuning",
+      "case_count": 24,
+      "label_changes": [],
+      "locked_for_prompt_tuning": false,
+      "evaluation_dataset_sha256": "92a6fb30bcab74001a0627f45730465f77d7f5a06de500cb6217ed5c0e5ddf64"
+    },
+    {
+      "dataset_path": "evals/answer-holdout-candidate-v1.json",
+      "dataset_version": "answer-holdout-candidate-v1",
+      "dataset_sha256": "048391ef941adfc71bffbfb1787fb9e75474faa75d7b93cc9a5dc55b9b2cd4ab",
+      "report_path": "evals/reports/answers-holdout-candidate-v1.json",
+      "report_sha256": "b846af5c267ba5c05833881f05b81fb1c602cfc0f36df256fed93ea3b2491e5f",
+      "role": "human-reviewed-locked-text-holdout",
+      "case_count": 20,
+      "label_changes": [],
+      "locked_for_prompt_tuning": true,
+      "evaluation_dataset_sha256": "048391ef941adfc71bffbfb1787fb9e75474faa75d7b93cc9a5dc55b9b2cd4ab"
+    }
+  ],
+  "metric_gates": [
+    {
+      "metric": "recall_at_10",
+      "observed": 1.0,
+      "threshold": 0.9,
+      "comparison": ">=",
+      "evidence_role": "database-retrieval-smoke",
+      "passed": true
+    },
+    {
+      "metric": "ndcg_at_10",
+      "observed": 0.9261859507142916,
+      "threshold": 0.75,
+      "comparison": ">=",
+      "evidence_role": "database-retrieval-smoke",
+      "passed": true
+    },
+    {
+      "metric": "macro_f1_all_five_classes",
+      "observed": 1.0,
+      "threshold": 0.85,
+      "comparison": ">=",
+      "evidence_role": "human-reviewed-locked-text-holdout",
+      "passed": true
+    },
+    {
+      "metric": "unsafe_answer_rate",
+      "observed": 0.0,
+      "threshold": 0.02,
+      "comparison": "<=",
+      "evidence_role": "human-reviewed-locked-text-holdout",
+      "passed": true
+    },
+    {
+      "metric": "citation_precision",
+      "observed": 1.0,
+      "threshold": 0.95,
+      "comparison": ">=",
+      "evidence_role": "human-reviewed-locked-text-holdout",
+      "passed": true
+    },
+    {
+      "metric": "citation_recall",
+      "observed": 1.0,
+      "threshold": 0.9,
+      "comparison": ">=",
+      "evidence_role": "human-reviewed-locked-text-holdout",
+      "passed": true
+    },
+    {
+      "metric": "end_to_end_accuracy",
+      "observed": 1.0,
+      "threshold": 0.85,
+      "comparison": ">=",
+      "evidence_role": "human-reviewed-locked-text-holdout",
+      "passed": true
+    },
+    {
+      "metric": "citation_precision",
+      "observed": 1.0,
+      "threshold": 0.95,
+      "comparison": ">=",
+      "evidence_role": "database-answer-development",
+      "passed": true
+    },
+    {
+      "metric": "citation_recall",
+      "observed": 0.9,
+      "threshold": 0.9,
+      "comparison": ">=",
+      "evidence_role": "database-answer-development",
+      "passed": true
+    },
+    {
+      "metric": "end_to_end_accuracy",
+      "observed": 0.9230769230769231,
+      "threshold": 0.85,
+      "comparison": ">=",
+      "evidence_role": "database-answer-development",
+      "passed": true
+    },
+    {
+      "metric": "unsafe_answer_rate",
+      "observed": 0.0,
+      "threshold": 0.02,
+      "comparison": "<=",
+      "evidence_role": "database-answer-development",
+      "passed": true
+    }
+  ],
+  "coverage_checks": {
+    "all_five_answerability_classes_in_holdout": true,
+    "no_degraded_cases_in_final_reports": true,
+    "regression_text_thresholds_passed": true,
+    "datasets_and_reports_unchanged_after_review": true
+  },
+  "previously_completed_engineering_validation": {
+    "evidence": "docs/STAGE3_PROGRESS.md at code_commit",
+    "backend_tests_passed": 115,
+    "frontend_tests_passed": 4,
+    "static_checks": [
+      "Ruff",
+      "strict Pyright",
+      "frontend lint",
+      "frontend typecheck",
+      "frontend production build"
+    ],
+    "real_integration": [
+      "embedding and chat providers",
+      "four database migrations",
+      "PostgreSQL/Redis/MinIO readiness",
+      "Celery worker ping",
+      "Nginx-to-API-to-chat grounded answer",
+      "five transactional retrieval filter and isolation checks"
+    ]
+  },
+  "known_differences": [
+    {
+      "case_id": "c200-wifi",
+      "evidence_role": "database-answer-development",
+      "expected": "ANSWERABLE",
+      "predicted": "UNANSWERABLE",
+      "labels_changed": false,
+      "note": "The manual describes initial setup; the question asks broader 5 GHz connectivity. The conservative refusal and original 12/13 development score remain recorded. Review was approved without requested label changes."
+    }
+  ],
+  "limitations": [
+    "Small stage-three text baseline; not certification of the full 220-case multimodal finished product.",
+    "Database retrieval and synthetic five-class routing are separate component evidence, not one joint end-to-end benchmark.",
+    "The 24-case regression set was exposed during tuning and is not an independent blind test.",
+    "The 20-case holdout was first measured after the final configuration and is now locked; do not use it for prompt tuning.",
+    "Historical reports retain their original pending-review acceptance status and all failed runs remain unchanged.",
+    "No new model calls or repeated engineering tests were required for this review-only acceptance record."
+  ],
+  "artifact_hash_basis": "dataset_sha256 and report_sha256 hash repository Git blob bytes; evaluation_dataset_sha256 preserves the historical input-byte hash, which may differ due to Windows CRLF line endings"
+}
